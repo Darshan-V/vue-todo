@@ -1,10 +1,8 @@
-import cors from 'cors'
 import express from 'express'
 import { ObjectId } from 'mongodb'
+import cors from   'cors'
 
 const app = express()
-
-
 
 import connectToDb from './connection.js'
 import { addTask, clearAll, clearDoneTasks, deleteTask, getTasks, updateTodo } from './db.js'
@@ -12,6 +10,12 @@ connectToDb()
 
 
 app.use(express.json())
+app.use(
+    cors({
+      origin: '*',
+      methods: ['GET', 'PUT', 'DELETE', 'POST']
+    })
+  )
 
 // Get
 app.get('/getAll', async (req, res) => {
@@ -36,7 +40,7 @@ app.post('/', async (req, res) => {
 // Put
 app.put('/:id', async (req, res) => {
   try {
-    await updateTodo({_id: ObjectId(req.params.id)},req.body)
+    await updateTodo({id: ObjectId(req.params.id)},req.body)
     res.send(`updated the ${req.body}`)
   } catch (err) {
     console.error(err.message)
@@ -67,12 +71,14 @@ app.delete('/',async(req,res)=>{
 //Delete done
 app.delete('/todo/done', async(req,res)=>{
   try {
-    await clearDoneTasks(req.body)
+    await clearDoneTasks()
     res.send("deleted done")
   } catch (err) {
     console.error(err.message)
   }
 })
+app.use(express.static('public'))
+
 
 app.listen(5000, () => {
     console.log(`listening on port 5000`)

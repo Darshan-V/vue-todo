@@ -3,19 +3,19 @@
     <div class="row">
       <div class="task">
         <div class="edit-mode-div">
-                 <span>
-                  <div class="todo-modifires">
-                    <button class="btn btn-default" v-on:click="removeTodo(todo)">remove</button>
-                    <input v-model="todo.done" type="checkbox">
-                  </div>
-                </span>
             <div class="todo-title" @click="activateInEditMode" v-show="!isEditing" >
                 {{ todo.title }}
-            </div>
+            </div><span>
+              <div class="todo-modifires">
+                    <input type="checkbox" class="checkbox"  @change="updateCompleted(todo)" />
+                    <button class="remove-button" v-on:click="removeTodo(todo)">X</button>
+              </div>
+            </span>
             <form v-show="isEditing" v-on:submit.prevent="deActivateInEditMode" >
                 <div class="form-group">
                     <input v-model="todo.title" type="text" class="form-control" >
                 </div>
+                
             </form>
         </div>
 
@@ -35,13 +35,13 @@
             </div>
             </div>
       </div>
-      <button class="remove-done" @click="removeDone(todo)">clear done</button>
   </li>
 </template>
 
 <script>
 export default {
   props: ['todo'],
+  
   data () {
     return {
       isEditing: false
@@ -57,25 +57,54 @@ export default {
     removeTodo (todo) {
       this.$emit('remove-todo', todo)
     },
-    removeDone(todo){
-      if(todo.done===true)
-      this.$emit('remove-done-todo',todo)
+    updateCompleted(todo){
+      this.$emit('update-check',todo)
     }
   }
 }
 </script>
 
 <style>
-  .task{
-    background-color: darkkhaki;
+ li{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+ }
+div.row{
+  display: flex;
+  width: 700px;
+  padding-left: 50px;
+}
+div.task{
+  display: flex;
+  flex-direction: column;
+}
+div.edit-mode-div {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-  }
-  inner-content-dropdown{
-    display:none;
-    flex-direction:column;
-    justify-content: space-around;
-  }
+    align-items: center;
+    flex-direction: row-reverse;
+    align-content: stretch;
+    font-size: 1.5em;
+}
+div.edit-mode-div {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: baseline;
+}
+div.todo-title{
+  width:300px;
+  margin-right: 5px;
+  background-color:white;
+  border-color:solid black ;
+  border:2px;
+}
 
+div.todo-modifiers{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  background-color: aquamarine;
+}
 </style>

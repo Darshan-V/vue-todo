@@ -28,13 +28,13 @@ export async function deleteTask(id) {
   return (await model.deleteOne(id))
 }
 
-export async function updateTodo(id, update) {
-  return (await model.updateOne(id, update))
+export async function updateTodo(id,update) {
+  return (await model.updateOne(id))
 }
 
 
-export async function clearDoneTasks(query) {
-  return (await model.deleteOne(query))
+export async function clearDoneTasks() {
+  return (await model.deleteMany({done:true}))
 }
 
 export async function clearAll() {

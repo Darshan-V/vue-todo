@@ -11,6 +11,8 @@
 
 <script>
 import TodoList from './components/TodoList.vue'
+import {addTask, getTasks} from './service.js'
+import uniqueId from 'lodash.uniqueid'
 
 export default {
   components: {
@@ -25,18 +27,26 @@ export default {
   methods: {
     addNewTodo () {
       if (this.newTodoText.length > 0) {
-        this.todos.push({
-          id:Date.now(),
+       const todo ={
           title: this.newTodoText,
-          done: false,
+          status: false,
           priority:'none',
           duedate:"",
           notes:""
-        })
-        this.newTodoText = ''
+        }
+        this.todos.push(todo)
         console.log(this.todos)
+        addTask(todo)
+        this.newTodoText = ''
       }
-    }
+    },
+      async getAllTasks() {
+      const result = await getTasks()
+      this.todos = result
+     },
+  },
+  mounted(){
+    this.getAllTasks()
   }
 }
 </script>
@@ -54,9 +64,7 @@ export default {
 .form-container{
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  width: 600px;
-  margin-left:  600px;
+  justify-content: space-around;
 }
 .form-control{
   width: 600px;
