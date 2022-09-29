@@ -29,7 +29,7 @@ export async function deleteTask(id) {
 }
 
 export async function updateTodo(id,update) {
-  return (await model.updateOne(id))
+  return (await model.updateOne(id,update))
 }
 
 

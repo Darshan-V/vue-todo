@@ -30,8 +30,8 @@ app.get('/getAll', async (req, res) => {
 // Add
 app.post('/', async (req, res) => {
   try {
-    await addTask(req.body)
-    res.send('OK')
+    const result = await addTask(req.body)
+    res.json(result)
   } catch (err) {
     console.log(err.message)
   }
@@ -39,13 +39,14 @@ app.post('/', async (req, res) => {
 
 // Put
 app.put('/:id', async (req, res) => {
-  try {
-    await updateTodo({id: ObjectId(req.params.id)},req.body)
-    res.send(`updated the ${req.body}`)
-  } catch (err) {
-    console.error(err.message)
-  }
-})
+    try {
+      const {id} = req.params
+      const result = await updateTodo({'_id': ObjectId(id)}, req.body)
+      res.json(result)
+    } catch (err) {
+      console.log(err)
+    }
+  })
 
 // Delete
 app.delete('/:id', async (req, res) => {

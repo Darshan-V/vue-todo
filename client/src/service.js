@@ -51,10 +51,25 @@ export async function clearAll() {
   return await fetch(`http://localhost:5000`, { method: 'DELETE' })
 }
 
-export async function updateTodo(id, status) {
+export async function updateStatus(id, status) {
   return await fetch(`http://localhost:5000/${id}`, {
     method: 'PUT',
     body: JSON.stringify({ status: `${status}` }),
+    headers: { 'content-type': 'application/json' }
+  })
+}
+export async function updateTitle(id, title) {
+  return await fetch(`http://localhost:5000/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({ title: `${title}` }),
+    headers: { 'content-type': 'application/json' }
+  })
+}
+
+export async function updateNote(id, notes) {
+  return await fetch(`http://localhost:5000/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({ notes: `${notes}` }),
     headers: { 'content-type': 'application/json' }
   })
 }

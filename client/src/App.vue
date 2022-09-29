@@ -12,7 +12,6 @@
 <script>
 import TodoList from './components/TodoList.vue'
 import {addTask, getTasks} from './service.js'
-import uniqueId from 'lodash.uniqueid'
 
 export default {
   components: {

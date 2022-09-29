@@ -3,17 +3,17 @@
     <div class="row">
       <div class="task">
         <div class="edit-mode-div">
-            <div class="todo-title" @click="activateInEditMode" v-show="!isEditing" >
+            <div class="todo-title"  @click="activateInEditMode"  v-show="!isEditing" >
                 {{ todo.title }}
             </div><span>
               <div class="todo-modifires">
-                    <input type="checkbox" class="checkbox"  @change="updateCompleted(todo)" />
+                    <input type="checkbox" class="checkbox" v-model="todo.status"  @change="updateCompleted(todo)"  />
                     <button class="remove-button" v-on:click="removeTodo(todo)">X</button>
               </div>
             </span>
             <form v-show="isEditing" v-on:submit.prevent="deActivateInEditMode" >
                 <div class="form-group">
-                    <input v-model="todo.title" type="text" class="form-control" >
+                    <input v-model="todo.title" type="text" class="form-control" @change="editTitle(todo)">
                 </div>
                 
             </form>
@@ -21,7 +21,7 @@
 
         <div class="inner-content-dropdown">
           <div class="note-div">
-              <textarea v-model="todo.notes" class="notes" placeholder="Description"></textarea>
+              <textarea v-model="todo.notes" class="notes" @change="setNote(todo)" placeholder="Description"></textarea>
           </div>
             <div class="date-priority-div">
                 <input v-model="todo.duedate" type="date" class="due-date-select"/>
@@ -59,6 +59,12 @@ export default {
     },
     updateCompleted(todo){
       this.$emit('update-check',todo)
+    },
+    editTitle(todo){
+      this.$emit('update-title',todo)
+    },
+    setNote(todo){
+      this.$emit('update-notes',todo)
     }
   }
 }
