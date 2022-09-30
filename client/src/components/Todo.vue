@@ -24,8 +24,8 @@
               <textarea v-model="todo.notes" class="notes" @change="setNote(todo)" placeholder="Description"></textarea>
           </div>
             <div class="date-priority-div">
-                <input v-model="todo.duedate" type="date" class="due-date-select"/>
-                  <select v-model="todo.priority"  class="priority-select">
+                <input v-model="todo.duedate" type="date" class="due-date-select" @change="setDuedate(todo)"/>
+                  <select v-model="todo.priority"  class="priority-select" @change="setPriority(todo)">
                   <option value="none">None</option>
                   <option value="low">Low</option>
                   <option value="medium">Medium</option>
@@ -65,6 +65,12 @@ export default {
     },
     setNote(todo){
       this.$emit('update-notes',todo)
+    },
+    setPriority(todo){
+      this.$emit('set-priority',todo)
+    },
+    setDuedate(todo){
+      this.$emit('set-duedate',todo)
     }
   }
 }

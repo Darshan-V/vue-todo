@@ -6,6 +6,8 @@
     @update-check="updateDoneStatus"
     @update-title="updateTodoTitle"
     @update-notes="updateTodoNote"
+    @set-priority="updateTodoPriority"
+    @set-duedate="updateTodoDuedate"
     :key="todo._id" 
     :todo.sync="todo" 
 
@@ -17,7 +19,7 @@
 
 <script>
 import Todo from './Todo'
-import {deleteTask, updateNote, updateStatus, updateTitle} from './../service'
+import {deleteTask, updateNote, updateStatus, updateTitle,updatePriority,updateDuedate} from './../service'
 
 export default {
   props: ['todos'],
@@ -39,8 +41,13 @@ export default {
     },
     updateTodoNote(todo){
       updateNote(todo._id,`${todo.notes}`)
+    },
+    updateTodoPriority(todo){
+      updatePriority(todo._id,`${todo.priority}`)
+    },
+    updateTodoDuedate(todo){
+      updateDuedate(todo._id,`${todo.duedate}`)
     }
-    
     },
    
   }
