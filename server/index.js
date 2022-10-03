@@ -9,7 +9,7 @@ import { addTask, clearAll, clearDoneTasks, deleteTask, getTasks, updateTodo } f
 connectToDb()
 
 
-app.use(express.json())
+app.use(express.json())//explore-->middleware
 app.use(
     cors({
       origin: '*',
@@ -19,7 +19,7 @@ app.use(
 
 // Get
 app.get('/getAll', async (req, res) => {
-  try {
+  try {//why am i using try catch
     const allTasks = await getTasks()
     res.json(allTasks)
   } catch (err) {
@@ -30,7 +30,8 @@ app.get('/getAll', async (req, res) => {
 // Add
 app.post('/', async (req, res) => {
   try {
-    const result = await addTask(req.body)
+    const todoItem = req.body
+    const result = await addTask(todoItem)
     res.json(result)
   } catch (err) {
     console.log(err.message)
@@ -41,7 +42,7 @@ app.post('/', async (req, res) => {
 app.put('/:id', async (req, res) => {
     try {
       const {id} = req.params
-      const result = await updateTodo({'_id': ObjectId(id)}, req.body)
+      const result = await updateTodo({_id: ObjectId(id)}, req.body)
       res.json(result)
     } catch (err) {
       console.log(err)
@@ -51,7 +52,7 @@ app.put('/:id', async (req, res) => {
 // Delete
 app.delete('/:id', async (req, res) => {
  try {
-  await deleteTask({_id: ObjectId(req.params.id)})
+  await deleteTask({_id: ObjectId(req.params.id)})//add property ID to todo
   res.send(`deleted with id ${req.params.id}`)
  } catch (err) {
   console.error(err.message)

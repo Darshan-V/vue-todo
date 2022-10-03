@@ -33,8 +33,9 @@ export default {
       deleteTask(todo._id)
     },
     updateDoneStatus(todo) {
+      todo.status = !todo.status
         updateStatus(todo._id,`${todo.status}`)
-        todo.status = !todo.status
+        
       },
     updateTodoTitle(todo){
       updateTitle(todo._id,`${todo.title}`)

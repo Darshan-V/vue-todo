@@ -38,16 +38,11 @@ export async function deleteTask(id, index) {
 
 
 export async function clearDoneTasks() {
-  for (let i = taskList.length - 1; i >= 0; --i) {
-    if (taskList[i].done === true) {
-      taskList.splice(i, 1);
-    }
-  }
-  return await fetch(`${mainUrl}/deletedone`, { method: 'DELETE' })
+  
+  return await fetch(`http://localhost:5000/todo/done`, { method: 'DELETE' })
 }
 
 export async function clearAll() {
-  taskList.length = 0
   return await fetch(`http://localhost:5000`, { method: 'DELETE' })
 }
 

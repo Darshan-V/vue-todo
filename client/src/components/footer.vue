@@ -20,7 +20,7 @@
   export default {
     name: 'Footer',
     props: {
-      todos: Object,
+      todos: Array,
       visibility: String
     },
     methods: {
@@ -34,12 +34,12 @@
             this.$emit('toggle')
         },
         todosCompleted() {
-            return this.todos.filter(todo => todo.completed).length
+            return this.todos.filter(todo => todo.status === true).length
         }
       },
       computed: {
         tasksLegend() {
-            if(this.visibility === 'all') {
+            if(this.todos.status) {
              return  `Hide Done Tasks (${this.todosCompleted()})`
             } else {
              return  `Show Done Tasks (${this.todosCompleted()})`
@@ -51,5 +51,8 @@
       }
   }
   </script>
+  
+  <style scoped>
+</style>
   
  

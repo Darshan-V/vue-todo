@@ -1,24 +1,27 @@
 <template>
+
   <div class="list-group-item">
     <div class="row">
       <div class="task">
         <div class="edit-mode-div">
           <div class="todo-modifires">
-                    <input type="checkbox" class="checkbox" v-model="todo.status"  @change="updateCompleted(todo)"  />
-                    <button class="remove-button" v-on:click="removeTodo(todo)">🧹</button>
+              <button class="showProps"
+              @click="toggleSecondaryContent(todo)"
+              >🔰
+              </button>
           </div>
-              <input class="todo-title" v-model="todo.title"  @click="activateInEditMode"  v-show="!isEditing" />             
-
-            
+              <input class="todo-title" v-model="todo.title"  @click="activateInEditMode"  v-show="!isEditing" />                         
             <form v-show="isEditing" v-on:submit.prevent="deActivateInEditMode" style="width:300px">
                 <div class="form-group">
                     <input v-model="todo.title" type="text" class="form-control" @change="editTitle(todo)">
-                </div>
-                
+                </div>               
             </form>
+            <input type="checkbox" class="checkbox" v-model="todo.status"  @click="updateCompleted(todo)"  />
+
+           
         </div>
 
-        <div class="inner-content-dropdown">
+        <div class="inner-content-dropdown" v-show="todo.showSecondary">
           <div class="note-div">
              <p class="note-heading">Note</p> 
               <textarea v-model="todo.notes" class="notes" @change="setNote(todo)" placeholder="Description"></textarea>
@@ -31,6 +34,7 @@
                   <option value="medium">Medium</option>
                   <option value="high">High</option>
                   </select>
+                  <button class="remove-button"  v-on:click="removeTodo(todo)">❌</button>
               </div>
             </div>
             </div>
@@ -71,7 +75,10 @@ export default {
     },
     setDuedate(todo){
       this.$emit('set-duedate',todo)
-    }
+    },
+    toggleSecondaryContent(todo) {
+      todo.showSecondary = !todo.showSecondary
+    },
   }
 }
 </script>
@@ -85,6 +92,8 @@ p.note-heading{
   margin-block-end: 0em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+  width:50px;
+  margin-left: 5px;
 }
 
  div.list-group-item{
@@ -95,10 +104,11 @@ p.note-heading{
 div.row{
   display: flex;
   width: 700px;
-  padding-left: 50px;
+  margin: auto;
+  padding-left: 20px;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  padding-bottom: 5px;
+  margin-bottom: 8px;
 }
 div.task{
   display: flex;
@@ -113,9 +123,8 @@ div.edit-mode-div {
 }
 input.todo-title{
   width:650px;
-  background-color:white;
-  border-color:solid black ;
-  border:1px;
+  background-color:rgb(240, 243, 230);
+  border-radius: 5px;
   font-size: 1.5em;
 }
 
@@ -124,6 +133,10 @@ div.todo-modifires{
   flex-direction: row;
   justify-content:flex-end;
   align-content: flex-end;
+}
+button.remove-button{
+  width: 3em;
+  margin-left: 50px;
 }
 button.remove-button:hover{
   background-color: red;
@@ -147,11 +160,20 @@ width: 300px
 textarea.notes{
   height: 70px;
   width:250px;
+  margin-left: 5px;
 }
 div.date-priority-div{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+.showProps{
+  background-color: beige;
+  border-radius: 5px;
+  height: 33px;
+  font-size: 1em;
+  justify-content: center;
+  padding-left: 3px;
 }
 
 </style>

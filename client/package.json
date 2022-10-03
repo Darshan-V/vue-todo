@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "core-js": "^3.8.3",
     "lodash": "^4.17.21",
     "lodash.uniqueid": "^4.0.1",
@@ -15,6 +17,7 @@
     "websocket": "^1.0.34"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.186",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "sass": "^1.32.7",
