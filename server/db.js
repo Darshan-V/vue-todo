@@ -11,7 +11,6 @@ const todoSchema = new mongoose.Schema({
 })
 
 const model = mongoose.model('todo', todoSchema)
-
 export  function getTasks() {
   return ( model.find({}))
 }
@@ -39,7 +38,7 @@ export  function clearDoneTasks() {
   return ( model.deleteMany({status:true}))
 }
 
-export async function clearAll() {
-  return (await model.deleteMany({}))
+export  function clearAll() {
+  return ( model.deleteMany({}))
 }
 

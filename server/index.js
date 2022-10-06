@@ -1,13 +1,11 @@
 import express from 'express'
-// import { ObjectId } from 'mongodb'
 import cors from   'cors'
 
 const app = express()
 
 import connectToDb from './connection.js'
-import { addTask, clearAll, clearDoneTasks, deleteTask, getTasks, updateTodo } from './db.js'
 connectToDb()
-
+import { addTask, clearAll, clearDoneTasks, deleteTask, getTasks, updateTodo } from './db.js'
 
 app.use(express.json())//explore-->middleware
 app.use(

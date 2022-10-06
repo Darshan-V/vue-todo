@@ -48,7 +48,8 @@
         checked() {
             return this.todosCompleted() > 0
         }
-      }
+      },
+      
   }
   </script>
   

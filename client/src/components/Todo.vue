@@ -10,7 +10,10 @@
               >🔰
               </button>
           </div>
-              <input class="todo-title" v-model="todo.title"  @click="activateInEditMode"  v-show="!isEditing" />                         
+              <input class="todo-title" v-model="todo.title" 
+               @click="activateInEditMode"  
+               v-show="!isEditing" 
+               :class="{ 'list-item__input--strike': todo.status }"/>                         
             <form v-show="isEditing" v-on:submit.prevent="deActivateInEditMode" >
                 <div class="form-group">
                     <input v-model="todo.title" type="text" class="form-control" @change="editTitle(todo)">
@@ -127,6 +130,10 @@ input.todo-title{
   background-color:rgb(240, 243, 230);
   border-radius: 5px;
   font-size: 1.5em;
+}
+.list-item__input--strike {
+  text-decoration: line-through;
+  color: var(--color-strike);
 }
 
 div.todo-modifires{

@@ -7,4 +7,22 @@ export default function connectToDb () {
       })
     }
     
-    //use mongodb module
+// import mongo from 'mongodb'
+// import { getTasks } from './db'
+// mongo = mongo.MongoClient
+// const url = `mongodb://127.0.0.1:27017`
+// mongo.connect(url, {
+//   useNewUrlParser:true,
+//   useUnifiedTopology:true
+// },(err,client) => {
+//   if(err){
+//     console.error(err)
+//   return
+//   }
+// const db = client.db('mydb')
+// const collection = db.collection('todos')
+
+
+// })
+
+

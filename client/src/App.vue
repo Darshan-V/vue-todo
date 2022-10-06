@@ -20,7 +20,7 @@
 import TodoList from './components/TodoList.vue'
 import Footer from './components/footer.vue'
 import {addTask, getTasks,clearAll, clearDoneTasks} from './service.js'
-import  { uniqueId } from 'lodash'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   components: {
@@ -38,14 +38,13 @@ export default {
     addNewTodo () {
       if (this.newTodoText.length > 0) {
        const todo ={
-          id:uniqueId(''),
+          id:uuidv4(),
           title: this.newTodoText,
           status: false,
           priority:'none',
           duedate:"",
           notes:"",
           showSecondary : false,
-          visibility:'true'
         }
         this.todos.push(todo)
         console.log(this.todos)

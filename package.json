@@ -19,6 +19,7 @@
     "cors": "*",
     "express": "*",
     "mongodb": "*",
-    "mongoose": "^6.6.2"
+    "mongoose": "^6.6.2",
+    "normalize-mongoose": "^1.0.0"
   }
 }

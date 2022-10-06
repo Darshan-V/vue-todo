@@ -13,6 +13,7 @@
     "lodash": "^4.17.21",
     "lodash.uniqueid": "^4.0.1",
     "vue": "^2.6.14",
+    "vue-unique-id": "^3.2.1",
     "webpack": "^5.74.0",
     "websocket": "^1.0.34"
   },
