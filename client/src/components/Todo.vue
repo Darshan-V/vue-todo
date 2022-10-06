@@ -11,7 +11,7 @@
               </button>
           </div>
               <input class="todo-title" v-model="todo.title"  @click="activateInEditMode"  v-show="!isEditing" />                         
-            <form v-show="isEditing" v-on:submit.prevent="deActivateInEditMode" style="width:300px">
+            <form v-show="isEditing" v-on:submit.prevent="deActivateInEditMode" >
                 <div class="form-group">
                     <input v-model="todo.title" type="text" class="form-control" @change="editTitle(todo)">
                 </div>               
@@ -48,7 +48,8 @@ export default {
   
   data () {
     return {
-      isEditing: false
+      isEditing: false,
+      showSecondary:false
     }
   },
   methods: {
@@ -103,9 +104,8 @@ p.note-heading{
  }
 div.row{
   display: flex;
-  width: 700px;
-  margin: auto;
-  padding-left: 20px;
+  width: 600px;
+  padding-left: 2px;
   flex-direction: row-reverse;
   justify-content: flex-end;
   margin-bottom: 8px;
@@ -117,12 +117,13 @@ div.task{
 }
 div.edit-mode-div {
     display: flex;
+    margin: auto;
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
 }
 input.todo-title{
-  width:650px;
+  width:500px;
   background-color:rgb(240, 243, 230);
   border-radius: 5px;
   font-size: 1.5em;

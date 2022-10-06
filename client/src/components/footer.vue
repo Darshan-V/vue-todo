@@ -52,7 +52,13 @@
   }
   </script>
   
-  <style scoped>
+<style >
+
+
+button.actionbar__show-toggle{
+  border-radius: 3px;
+  margin-right: 2px;
+}
 </style>
   
  

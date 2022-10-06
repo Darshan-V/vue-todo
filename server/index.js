@@ -1,5 +1,5 @@
 import express from 'express'
-import { ObjectId } from 'mongodb'
+// import { ObjectId } from 'mongodb'
 import cors from   'cors'
 
 const app = express()
@@ -42,7 +42,7 @@ app.post('/', async (req, res) => {
 app.put('/:id', async (req, res) => {
     try {
       const {id} = req.params
-      const result = await updateTodo({_id: ObjectId(id)}, req.body)
+      const result = await updateTodo({'id': id}, req.body)
       res.json(result)
     } catch (err) {
       console.log(err)
@@ -52,7 +52,7 @@ app.put('/:id', async (req, res) => {
 // Delete
 app.delete('/:id', async (req, res) => {
  try {
-  await deleteTask({_id: ObjectId(req.params.id)})//add property ID to todo
+  await deleteTask({'id':req.params.id})//add property ID to todo
   res.send(`deleted with id ${req.params.id}`)
  } catch (err) {
   console.error(err.message)
@@ -64,7 +64,7 @@ app.delete('/:id', async (req, res) => {
 app.delete('/',async(req,res)=>{
   try {
     await clearAll()
-    res.send('deleted all')
+    res.json('deleted all')
   } catch (err) {
     console.error(err.message)
   }

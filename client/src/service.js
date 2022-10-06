@@ -11,10 +11,6 @@ export async function getTasks() {
 
 }
 
-
-
-
-
 export async function fetchTask(id) {
   return (await fetch(`http://localhost:5000/${id}`))
 }
@@ -29,7 +25,7 @@ export async function addTask(item) {
   })
 }
 
-export async function deleteTask(id, index) {
+export async function deleteTask(id) {
  
   return await fetch(`http://localhost:5000/${id}`, { method: 'DELETE' })
 

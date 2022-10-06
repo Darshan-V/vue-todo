@@ -1,14 +1,15 @@
 <template>
   <ul class="list-group">
     <todo 
-     v-for="todo in todos" 
+     v-for="(todo,i) in todos" 
+     :todo="todo.id"
      @remove-todo="removeTodo" 
     @update-check="updateDoneStatus"
     @update-title="updateTodoTitle"
     @update-notes="updateTodoNote"
     @set-priority="updateTodoPriority"
     @set-duedate="updateTodoDuedate"
-    :key="todo._id" 
+    :key="i+todo.id" 
     :todo.sync="todo" 
 
     />
@@ -30,24 +31,24 @@ export default {
     removeTodo (todo) {
       const todoIndex = this.todos.indexOf(todo)
       this.todos.splice(todoIndex, 1)
-      deleteTask(todo._id)
+      deleteTask(todo.id)
     },
     updateDoneStatus(todo) {
       todo.status = !todo.status
-        updateStatus(todo._id,`${todo.status}`)
+        updateStatus(todo.id,`${todo.status}`)
         
       },
     updateTodoTitle(todo){
-      updateTitle(todo._id,`${todo.title}`)
+      updateTitle(todo.id,`${todo.title}`)
     },
     updateTodoNote(todo){
-      updateNote(todo._id,`${todo.notes}`)
+      updateNote(todo.id,`${todo.notes}`)
     },
     updateTodoPriority(todo){
-      updatePriority(todo._id,`${todo.priority}`)
+      updatePriority(todo.id,`${todo.priority}`)
     },
     updateTodoDuedate(todo){
-      updateDuedate(todo._id,`${todo.duedate}`)
+      updateDuedate(todo.id,`${todo.duedate}`)
     }
     },
    

@@ -20,28 +20,32 @@
 import TodoList from './components/TodoList.vue'
 import Footer from './components/footer.vue'
 import {addTask, getTasks,clearAll, clearDoneTasks} from './service.js'
+import  { uniqueId } from 'lodash'
+
 export default {
   components: {
     TodoList,
-    Footer
+    Footer,
   },
   data () {
     return {
       newTodoText: '',
       todos: [],
       visibility:"true",
-    }
+     }
   },
   methods: {
     addNewTodo () {
       if (this.newTodoText.length > 0) {
        const todo ={
+          id:uniqueId(''),
           title: this.newTodoText,
           status: false,
           priority:'none',
           duedate:"",
           notes:"",
-          showSecondary : false
+          showSecondary : false,
+          visibility:'true'
         }
         this.todos.push(todo)
         console.log(this.todos)
@@ -58,17 +62,18 @@ export default {
       await clearAll()
      },
      async clearDone(){
+      this.todos = this.todos.filter(todo => !todo.status)
       await clearDoneTasks()
      },
      todosCompleted() {
       return this.todos.filter(todo => todo.status === true).length
       },
       toggleVisibility() {
-          if (todo.status) {
-              this.visibility = 'true'
+          if (this.visibility === 'all') {
+              this.visibility = 'completed'
             }
           else {
-              this.todos
+              this.visibility = 'all'
             }
         },
     
@@ -79,7 +84,7 @@ export default {
   },
   computed: {
         tasksLegend() {
-            if(this.todos) {
+            if(this.visibility==='all') {
              return  `Hide Done Tasks (${this.todosCompleted()})`
             } else {
              return  `Show Done Tasks (${this.todosCompleted()})`
@@ -89,11 +94,11 @@ export default {
             return this.todosCompleted() > 0
         },
       effectiveTodos() {
-        if(this.todos){
+        if(this.visibility === 'all'){
           return this.todos
           }
         else {
-            return this.todos.filter(todo => !todo.completed)
+            return this.todos.filter(todo => !todo.status === true)
           }
         }
       
@@ -117,10 +122,12 @@ html{
 .form-container{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 .form-control{
-  width: 600px;
+  width: 550px;
+  margin-left: 50px;
+  padding-right: 50px;
   font-size: 1.5em;
 }
 footer{
@@ -129,4 +136,5 @@ footer{
   justify-content: space-evenly;
   padding-top: 10px;
 }
+
 </style>
